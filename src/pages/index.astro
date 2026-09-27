@@ -1,0 +1,205 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+import HeroVisual from '../components/landing/HeroVisual.svelte';
+import ThemeToggle from '../components/shared/ThemeToggle.svelte';
+import { ArrowRight, Activity, Code, GitMerge, Search, LayoutGrid, Folder, ShieldCheck, Cpu } from 'lucide-svelte';
+---
+
+<LandingLayout title="Devmemory - AI Error Tracking">
+  <!-- Absolute Theme Toggle -->
+  <div class="absolute top-4 right-4 z-50">
+    <ThemeToggle client:load />
+  </div>
+
+  <!-- Navbar / Header inside the page flow -->
+  <header class="w-full border-b-2 border-border bg-background relative z-40">
+    <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
+      <a href="/" class="heading-h3 text-2xl font-bold tracking-tight text-content">
+        dev<span class="text-primary">Memory</span>
+      </a>
+      <!-- Dummy navigation for visual sake -->
+      <nav class="hidden md:flex gap-6 font-bold">
+        <a href="#how-it-works" class="hover:text-primary transition-colors">How It Works</a>
+        <a href="#features" class="hover:text-primary transition-colors">Features</a>
+        <a href="#pricing" class="hover:text-primary transition-colors">Pricing</a>
+      </nav>
+      <div class="w-24"></div> <!-- Spacer for ThemeToggle alignment -->
+    </div>
+  </header>
+
+  <main class="w-full bg-background overflow-hidden">
+    
+    <!-- Hero Section: Strict 2-column grid -->
+    <section class="relative mx-auto w-full max-w-7xl px-6 py-20 lg:py-32">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Left Column: Typography & CTAs -->
+        <div class="flex flex-col items-start text-left z-10">
+          <div class="mb-6 inline-flex items-center gap-2 rounded-sm border-2 border-border bg-card-prs px-3 py-1 font-bold text-card-content shadow-[2px_2px_0px_0px_var(--shadow-color)]">
+            <Activity size={16} strokeWidth={3} />
+            <span class="text-sm uppercase tracking-wider">AI-Powered Error Tracking</span>
+          </div>
+
+          <h1 class="heading-h1 mb-6 text-5xl md:text-7xl font-black text-content leading-tight">
+            Never Debug The Same <span class="bg-primary text-white px-2 rounded-sm inline-block transform -rotate-1 border-4 border-border shadow-[4px_4px_0px_0px_var(--shadow-color)]">Error</span> Twice.
+          </h1>
+
+          <p class="mb-10 text-lg md:text-xl font-medium text-content/80 max-w-lg">
+            Connect your repositories to Devmemory. Capture bugs, match AI-generated solutions, and track issues across your workspace in one neo-brutalist dashboard.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
+            <a href="/auth/login" class="neo-btn-primary flex items-center justify-center gap-3 text-lg w-full sm:w-auto">
+              Get Started
+              <ArrowRight size={20} strokeWidth={3} />
+            </a>
+            <a 
+              href="https://github.com/IIQball/devmemory" 
+              target="_blank" 
+              class="neo-btn flex items-center justify-center gap-3 text-lg w-full sm:w-auto hover:bg-card-issues hover:text-card-content transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+              View Source
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: 3D Visual Container -->
+        <div class="relative w-full aspect-square max-w-md mx-auto lg:max-w-none lg:h-[500px]">
+          <!-- We confine HeroVisual within this relative box so it never overlaps text -->
+          <div class="absolute inset-0 overflow-hidden">
+            <HeroVisual client:idle />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="w-full border-b-4 border-border bg-content h-2"></div>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="mx-auto w-full max-w-7xl px-6 py-24">
+      <div class="text-center mb-16">
+        <h2 class="heading-h1 text-4xl md:text-5xl font-black mb-4">How It Works</h2>
+        <p class="text-lg text-content/70 max-w-2xl mx-auto font-bold">A streamlined pipeline from bug discovery to AI resolution.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="neo-card bg-card-main relative pt-12">
+          <div class="absolute -top-6 left-6 h-12 w-12 rounded-sm border-2 border-border bg-primary text-white flex items-center justify-center font-black text-xl shadow-[2px_2px_0px_0px_var(--shadow-color)]">1</div>
+          <GitMerge size={40} class="mb-4 text-primary" strokeWidth={2.5} />
+          <h3 class="heading-h3 text-2xl font-bold mb-3">Connect GitHub</h3>
+          <p class="font-medium text-content/70">Link your repositories. Devmemory automatically syncs issues, pull requests, and commit data via webhooks.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="neo-card bg-card-main relative pt-12">
+          <div class="absolute -top-6 left-6 h-12 w-12 rounded-sm border-2 border-border bg-card-errors text-card-content flex items-center justify-center font-black text-xl shadow-[2px_2px_0px_0px_var(--shadow-color)]">2</div>
+          <Search size={40} class="mb-4 text-card-errors" strokeWidth={2.5} />
+          <h3 class="heading-h3 text-2xl font-bold mb-3">Index Errors</h3>
+          <p class="font-medium text-content/70">Capture and classify errors with full-text search. AI pairs stack traces with previously successful solutions.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="neo-card bg-card-main relative pt-12">
+          <div class="absolute -top-6 left-6 h-12 w-12 rounded-sm border-2 border-border bg-card-issues text-card-content flex items-center justify-center font-black text-xl shadow-[2px_2px_0px_0px_var(--shadow-color)]">3</div>
+          <Cpu size={40} class="mb-4 text-card-issues" strokeWidth={2.5} />
+          <h3 class="heading-h3 text-2xl font-bold mb-3">Expose via MCP</h3>
+          <p class="font-medium text-content/70">Consume your team's collective memory securely within your IDE via the Model Context Protocol (MCP) server.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Features (Bento Grid) -->
+    <section id="features" class="bg-card-resolved border-y-4 border-border py-24">
+      <div class="mx-auto w-full max-w-7xl px-6">
+        <h2 class="heading-h1 text-4xl md:text-5xl font-black mb-12 text-card-content text-center">Core Features</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 auto-rows-[200px]">
+          <div class="neo-card bg-card-main md:col-span-2 md:row-span-2 flex flex-col justify-between">
+            <div>
+              <LayoutGrid size={32} class="mb-4 text-primary" />
+              <h3 class="text-2xl font-bold mb-2">Neo-Brutalist Dashboard</h3>
+              <p class="font-medium text-content/70">A bold, accessible UI that prioritizes speed and clarity over fluff. No rounded fluff, just thick borders and hard shadows.</p>
+            </div>
+            <div class="mt-4 h-32 bg-base-200 border-2 border-border rounded-sm overflow-hidden flex items-center justify-center">
+              <span class="font-bold opacity-50">UI Preview</span>
+            </div>
+          </div>
+          
+          <div class="neo-card bg-card-errors text-card-content md:col-span-2 flex flex-col justify-center">
+            <h3 class="text-xl font-bold mb-2">Smart Error Matching</h3>
+            <p class="font-medium opacity-90">PostgreSQL Full-Text Search identifies recurring issues instantly.</p>
+          </div>
+          
+          <div class="neo-card bg-card-prs text-card-content flex flex-col justify-center items-center text-center">
+            <Folder size={32} class="mb-2" />
+            <h3 class="font-bold">Workspaces</h3>
+          </div>
+          
+          <div class="neo-card bg-card-issues text-card-content flex flex-col justify-center items-center text-center">
+            <ShieldCheck size={32} class="mb-2" />
+            <h3 class="font-bold">Role Based Auth</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="mx-auto w-full max-w-7xl px-6 py-24">
+      <div class="text-center mb-16">
+        <h2 class="heading-h1 text-4xl md:text-5xl font-black mb-4">Simple Pricing</h2>
+        <p class="text-lg text-content/70 max-w-2xl mx-auto font-bold">Start for free, scale when you need.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- Free Tier -->
+        <div class="neo-card bg-card-main flex flex-col">
+          <h3 class="text-2xl font-black mb-2">Hacker</h3>
+          <p class="text-4xl font-black mb-6">$0<span class="text-lg text-content/50">/mo</span></p>
+          <ul class="space-y-4 mb-8 flex-1 font-bold">
+            <li class="flex items-center gap-2"><ArrowRight size={16} class="text-primary"/> Up to 3 Projects</li>
+            <li class="flex items-center gap-2"><ArrowRight size={16} class="text-primary"/> Basic GitHub Sync</li>
+            <li class="flex items-center gap-2"><ArrowRight size={16} class="text-primary"/> 100 Errors / month</li>
+          </ul>
+          <a href="/auth/register" class="neo-btn w-full text-center">Start Free</a>
+        </div>
+
+        <!-- Pro Tier -->
+        <div class="neo-card bg-primary text-white flex flex-col transform md:-translate-y-4 shadow-[8px_8px_0px_0px_var(--shadow-color)]">
+          <div class="mb-4 inline-block bg-warning text-content text-xs font-black px-2 py-1 uppercase tracking-widest border-2 border-border w-fit">Most Popular</div>
+          <h3 class="text-2xl font-black mb-2">Team</h3>
+          <p class="text-4xl font-black mb-6">$12<span class="text-lg text-white/70">/mo</span></p>
+          <ul class="space-y-4 mb-8 flex-1 font-bold">
+            <li class="flex items-center gap-2"><ArrowRight size={16} class="text-warning"/> Unlimited Projects</li>
+            <li class="flex items-center gap-2"><ArrowRight size={16} class="text-warning"/> Real-time GitHub Webhooks</li>
+            <li class="flex items-center gap-2"><ArrowRight size={16} class="text-warning"/> MCP Server Access</li>
+            <li class="flex items-center gap-2"><ArrowRight size={16} class="text-warning"/> Priority AI Matching</li>
+          </ul>
+          <a href="/auth/register" class="neo-btn bg-warning text-content hover:bg-white text-center">Upgrade to Team</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t-4 border-border bg-card-main py-12">
+      <div class="mx-auto w-full max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <a href="/" class="heading-h3 text-2xl font-bold tracking-tight text-content">
+            dev<span class="text-primary">Memory</span>
+          </a>
+          <p class="font-bold text-content/60 mt-2">© 2026 Devmemory. All rights reserved.</p>
+        </div>
+        <div class="flex gap-6 font-bold">
+          <a href="#" class="hover:text-primary transition-colors">Privacy</a>
+          <a href="#" class="hover:text-primary transition-colors">Terms</a>
+          <a href="https://github.com/IIQball/devmemory" target="_blank" class="hover:text-primary transition-colors flex items-center gap-2">
+            <Code size={18} />
+            GitHub
+          </a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+</LandingLayout>
