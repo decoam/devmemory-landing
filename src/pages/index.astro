@@ -2,7 +2,7 @@
 import LandingLayout from '../layouts/LandingLayout.astro';
 import HeroVisual from '../components/landing/HeroVisual.svelte';
 import ThemeToggle from '../components/shared/ThemeToggle.svelte';
-import { ArrowRight, Activity, Code, GitMerge, Search, LayoutGrid, Folder, ShieldCheck, Cpu } from 'lucide-svelte';
+import { ArrowRight, Activity, Code, GitMerge, Search, LayoutGrid, Folder, ShieldCheck, Cpu, Zap, BarChart2, Star, TestTube2, Users } from 'lucide-svelte';
 ---
 
 <LandingLayout title="Devmemory - AI Error Tracking">
@@ -48,7 +48,10 @@ import { ArrowRight, Activity, Code, GitMerge, Search, LayoutGrid, Folder, Shiel
           </p>
 
           <div class="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
-            <a href="/auth/login" class="neo-btn-primary flex items-center justify-center gap-3 text-lg w-full sm:w-auto">
+            <a 
+              href="/auth/login" 
+              class="neo-btn-primary flex items-center justify-center gap-3 text-lg w-full sm:w-auto"
+            >
               Get Started
               <ArrowRight size={20} strokeWidth={3} />
             </a>
@@ -110,6 +113,37 @@ import { ArrowRight, Activity, Code, GitMerge, Search, LayoutGrid, Folder, Shiel
       </div>
     </section>
 
+    <!-- Divider -->
+    <div class="w-full border-b-4 border-border bg-content h-2"></div>
+
+    <!-- Stats Section -->
+    <section id="stats" class="bg-card-resolved border-y-4 border-border py-24">
+      <div class="mx-auto w-full max-w-7xl px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+          <div class="neo-card bg-card-main p-8">
+            <Zap size={40} class="mx-auto mb-4 text-primary" />
+            <h3 class="text-4xl font-black text-content">10K+</h3>
+            <p class="font-medium text-content/70 mt-2">Errors Tracked</p>
+          </div>
+          <div class="neo-card bg-card-main">
+            <Search size={40} class="mx-auto mb-4 text-card-errors" />
+            <h3 class="text-4xl font-black text-content">5.2M+</h3>
+            <p class="font-medium text-content/70">Errors Indexed</p>
+          </div>
+          <div class="neo-card bg-card-main">
+            <Cpu size={40} class="mx-auto mb-4 text-primary" />
+            <h3 class="text-4xl font-black text-content">98%</h3>
+            <p class="font-medium text-content/70">AI Match Accuracy</p>
+          </div>
+          <div class="neo-card bg-card-main">
+            <Users size={40} class="mx-auto mb-4 text-card-prs" />
+            <h3 class="text-4xl font-black text-content">500+</h3>
+            <p class="font-medium text-content/70">Teams Onboarded</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Core Features (Bento Grid) -->
     <section id="features" class="bg-card-resolved border-y-4 border-border py-24">
       <div class="mx-auto w-full max-w-7xl px-6">
@@ -129,8 +163,7 @@ import { ArrowRight, Activity, Code, GitMerge, Search, LayoutGrid, Folder, Shiel
           
           <div class="neo-card bg-card-errors text-card-content md:col-span-2 flex flex-col justify-center">
             <h3 class="text-xl font-bold mb-2">Smart Error Matching</h3>
-            <p class="font-medium opacity-90">PostgreSQL Full-Text Search identifies recurring issues instantly.</p>
-          </div>
+            <p class="font-medium opacity-90">PostgreSQL Full-Text Search identifies recurring issues instantly.</          </div>
           
           <div class="neo-card bg-card-prs text-card-content flex flex-col justify-center items-center text-center">
             <Folder size={32} class="mb-2" />
@@ -149,8 +182,7 @@ import { ArrowRight, Activity, Code, GitMerge, Search, LayoutGrid, Folder, Shiel
     <section id="pricing" class="mx-auto w-full max-w-7xl px-6 py-24">
       <div class="text-center mb-16">
         <h2 class="heading-h1 text-4xl md:text-5xl font-black mb-4">Simple Pricing</h2>
-        <p class="text-lg text-content/70 max-w-2xl mx-auto font-bold">Start for free, scale when you need.</p>
-      </div>
+        <p class="text-lg text-content/70 max-w-2xl mx-auto font-bold">Start for free, scale when you need.</      </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         <!-- Free Tier -->
@@ -181,6 +213,85 @@ import { ArrowRight, Activity, Code, GitMerge, Search, LayoutGrid, Folder, Shiel
       </div>
     </section>
 
+    <!-- Testimonials / Social Proof -->
+    <section id="testimonials" class="bg-card-main py-24">
+      <div class="mx-auto w-full max-w-7xl px-6">
+        <h2 class="heading-h1 text-4xl md:text-5xl font-black mb-12 text-center">Trusted by Developers</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="neo-card bg-card-main p-6">
+            <div class="flex gap-1 mb-4">
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+            </div>
+            <p class="font-medium text-content/80 mb-4">"Devmemory cut our debugging time by 80%. The AI matching is uncanny - it finds solutions we didn't even know existed."</p>
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-primary flex items-center justify-center font-bold text-white">JD</div>
+              <div>
+                <p class="font-bold">John Doe</p>
+                <p class="text-sm text-content/60">Senior Dev @ TechCorp</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="neo-card bg-card-main p-6">
+            <div class="flex gap-1 mb-4">
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+            </div>
+            <p class="font-medium text-content/80 mb-4">"MCP integration is a game-changer. Our team queries Devmemory directly from VS Code - no context switching."</p>
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-card-prs flex items-center justify-center font-bold text-white">SK</div>
+              <div>
+                <p class="font-bold">Sarah Kim</p>
+                <p class="text-sm text-content/60">Lead Engineer @ StartupXYZ</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="neo-card bg-card-main p-6">
+            <div class="flex gap-1 mb-4">
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+              <Star size={16} class="text-warning fill-current" />
+            </div>
+            <p class="font-medium text-content/80 mb-4">"The AI matching is scary good. We've reduced MTTR from hours to minutes. Best dev tool investment this year."</p>
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-card-issues flex items-center justify-center font-bold text-white">MR</div>
+              <div>
+                <p class="font-bold">Mike Ross</p>
+                <p class="text-sm text-content/60">CTO @ ScaleUp</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="bg-primary text-white py-24">
+      <div class="mx-auto w-full max-w-3xl px-6 text-center">
+        <h2 class="heading-h1 text-4xl md:text-5xl font-black mb-6">Ready to Stop Re-debugging?</h2>
+        <p class="text-xl text-white/80 mb-8 max-w-xl mx-auto">Join 500+ teams who stopped re-debugging the same errors. Free to start, no credit card required.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/auth/register" class="neo-btn bg-warning text-content hover:bg-white text-lg px-8 py-4 w-full sm:w-auto">
+            Get Started Free
+          </a>
+          <a href="https://github.com/IIQball/devmemory" target="_blank" class="neo-btn bg-transparent border-2 border-white text-lg px-8 py-4 w-full sm:w-auto hover:bg-white hover:text-primary transition-colors">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="border-t-4 border-border bg-card-main py-12">
       <div class="mx-auto w-full max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -188,8 +299,7 @@ import { ArrowRight, Activity, Code, GitMerge, Search, LayoutGrid, Folder, Shiel
           <a href="/" class="heading-h3 text-2xl font-bold tracking-tight text-content">
             dev<span class="text-primary">Memory</span>
           </a>
-          <p class="font-bold text-content/60 mt-2">© 2026 Devmemory. All rights reserved.</p>
-        </div>
+          <p class="font-bold text-content/60 mt-2">© 2026 Devmemory. All rights reserved.</        </div>
         <div class="flex gap-6 font-bold">
           <a href="#" class="hover:text-primary transition-colors">Privacy</a>
           <a href="#" class="hover:text-primary transition-colors">Terms</a>

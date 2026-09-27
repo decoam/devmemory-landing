@@ -17,14 +17,15 @@
   let graphGroup: THREE.Group;
   
   // Dynamic Materials for Theme Swapping
+  let centerMaterial: THREE.MeshBasicMaterial;
   let lineMaterial: THREE.LineBasicMaterial;
   let linkMaterial: THREE.LineBasicMaterial;
-  let centerMaterial: THREE.MeshBasicMaterial;
   let themeObserver: MutationObserver;
+  let htmlEl: HTMLHtmlElement;
 
   onMount(() => {
     // Determine initial theme
-    const htmlEl = document.documentElement;
+    htmlEl = document.documentElement;
     const isDark = htmlEl.getAttribute('data-theme') === 'neoDark' || htmlEl.classList.contains('dark');
     const strokeColor = isDark ? 0xFFFFFF : 0x000000;
 
@@ -204,16 +205,16 @@
     themeObserver = new MutationObserver(() => {
       const currentDark = document.documentElement.getAttribute('data-theme') === 'neoDark' || document.documentElement.classList.contains('dark');
       const newStrokeColor = currentDark ? 0xFFFFFF : 0x000000;
+      centerMaterial.color.setHex(newStrokeColor);
       lineMaterial.color.setHex(newStrokeColor);
       linkMaterial.color.setHex(newStrokeColor);
-      centerMaterial.color.setHex(newStrokeColor);
     });
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class'] });
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
-      observer.disconnect();
+      themeObserver.disconnect();
     };
   });
 
@@ -246,7 +247,7 @@
   });
 </script>
 
-<div class="absolute inset-0 z-0 pointer-events-auto cursor-crosshair" bind:this={canvasContainer}></div>
+<div class="w-full h-full pointer-events-auto cursor-crosshair" bind:this={canvasContainer}></div>
 
 <style>
   div {
