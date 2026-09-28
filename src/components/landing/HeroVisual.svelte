@@ -22,8 +22,18 @@
   let linkMaterial: THREE.LineBasicMaterial;
   let themeObserver: MutationObserver;
   let htmlEl: HTMLHtmlElement;
+  
+  // Mobile detection flags (set in onMount)
+  let isMobile = false;
+  let isLowEndDevice = false;
+  let enablePulseAnim = true;
 
   onMount(() => {
+    // Mobile detection (client-side only)
+    const isMobile = typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isLowEndDevice = typeof navigator !== 'undefined' && navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+    const enablePulseAnim = !(isMobile || isLowEndDevice);
+
     // Determine initial theme
     htmlEl = document.documentElement;
     const isDark = htmlEl.getAttribute('data-theme') === 'neoDark' || htmlEl.classList.contains('dark');
@@ -34,13 +44,19 @@
 
     // 2. Camera Setup
     const aspect = canvasContainer.clientWidth / canvasContainer.clientHeight;
-    camera = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
-    camera.position.z = 10;
+    camera = new THREE.PerspectiveCamera(50, aspect, 0.1, 100);
+    camera.position.z = 12;
 
     // 3. Renderer Setup (transparent)
-    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer = new THREE.WebGLRenderer({ 
+      alpha: true, 
+      antialias: true,
+      powerPreference: 'high-performance',
+      preserveDrawingBuffer: false
+    });
     renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
     canvasContainer.appendChild(renderer.domElement);
 
     // Initialize Shared Materials
@@ -80,7 +96,7 @@
         node.position.set(0, 0, 0);
         node.scale.set(1.5, 1.5, 1.5);
       } else {
-        const radius = 3 + Math.random() * 2;
+        const radius = 3.5 + Math.random() * 1.5;
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.random() * Math.PI;
         
@@ -96,7 +112,7 @@
     }
 
     // Connect nodes to center and some to each other
-    for (let i = 1; i < nodes.length; i++) {
+    for (let i = 1; i < 8; i++) {
       // Link to center
       const points1 = [nodes[0].position, nodes[i].position];
       const geometry1 = new THREE.BufferGeometry().setFromPoints(points1);
@@ -190,16 +206,34 @@
       mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
       mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
     };
-    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+
+    // Touch Move Listener for mobile
+    const onTouchMove = (event: TouchEvent) => {
+      if (event.touches.length > 0) {
+        const touch = event.touches[0];
+        const rect = canvasContainer.getBoundingClientRect();
+        mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+      }
+    };
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
 
     // Resize Listener
     const onResize = () => {
       if (!canvasContainer || !camera || !renderer) return;
+      const width = canvasContainer.clientWidth;
+      const height = canvasContainer.clientHeight;
+      if (width === 0 || height === 0) return;
+      
       camera.aspect = canvasContainer.clientWidth / canvasContainer.clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
     };
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
+
+    // Force initial render
+    renderer.render(scene, camera);
 
     // Dynamic Theme Observer
     themeObserver = new MutationObserver(() => {
@@ -213,6 +247,7 @@
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('resize', onResize);
       themeObserver.disconnect();
     };
